@@ -1,0 +1,53 @@
+# Solend Liquidator Collector Configuration
+
+[rpc]
+# RPC endpoint URL
+url = "https://api.mainnet-beta.solana.com"
+# Alternative RPCs for failover
+backup_urls = [
+    "https://solana-api.projectserum.com",
+    "https://api.mainnet-beta.solana.com"
+]
+
+[scan]
+# Maximum number of signatures to fetch per batch
+batch_size = 1000
+# Number of concurrent workers
+workers = 20
+# Maximum concurrent RPC requests
+max_concurrent = 50
+# Delay between batches (milliseconds)
+batch_delay = 50
+# Maximum retries for failed requests
+max_retries = 3
+# Retry delay multiplier (milliseconds)
+retry_delay = 200
+
+[programs]
+# Solend program ID
+solend_program_id = "So1endDq2YkqhipRh3WViPa8hdiSpxWy6z3Z6tMCpAo"
+
+# Liquidation instruction discriminators (hex format)
+liquidation_discriminators = [
+    "9a151f9b4a8c3d8f",  # liquidateObligationAndRedeemReserveCollateral
+    "e45c3f9c8a2b1d7f",  # liquidateObligation
+]
+
+[output]
+# Default output file
+default_file = "liquidators.csv"
+# CSV headers
+csv_headers = [
+    "signature",
+    "slot", 
+    "timestamp",
+    "liquidator",
+    "program_id",
+    "success"
+]
+
+[logging]
+# Log level: error, warn, info, debug, trace
+level = "info"
+# Enable detailed transaction logging
+detailed_logging = false
